@@ -18,9 +18,20 @@ class punto
 		}
 		void most_punt()
 		{
-			cout << "El punto es: ( " << x << " , " << y << " )" << endl;
+			cout << "   ( " << x << " , " << y << " )" << endl;
 		}
 };
+
+template <class TEST>
+inline void swapo(TEST& d, TEST& e)
+{
+	TEST temp = d;
+	d = e;
+	e = temp;
+}
+
+float calc_pend(punto, punto);
+
 
 int main()
 {
@@ -28,39 +39,36 @@ int main()
 	float m;
 	
 	//Pedimos los dos puntos
-	cout << "Empezamos con el primer punto" <<endl;
+	cout << endl << "Empezamos con el primer punto" <<endl;
 	p1.ped_punt();
-	cout << "Ahora con el segundo punto" <<endl;
+	cout << endl << "Ahora con el segundo punto" <<endl;
 	p2.ped_punt();
 	
 	//hacemos el swap
-	float var;
-	
-	var=p1.x;
-	p1.x=p2.x;
-	p2.x=var;
-	
-	var=p1.y;
-	p1.y=p2.y;
-	p2.y=var;
+	swapo(p1.x, p2.x);
+	swapo(p1.y, p2.y);
 	
 	//Mostramos los puntos
-	cout <<"Despues de hacer el cambio los puntos son: "<< endl;
-	cout << "Primer punto: "<< endl;
+	cout << endl <<"Despues de hacer el cambio los puntos son: "<< endl;
+	cout << endl << "El primer punto es:";
 	p1.most_punt();
-	cout << "Primer punto: "<< endl;
+	cout << endl<< "El segundo punto es:";
 	p2.most_punt();
 	
 	//Calculo de la pendiente
-	float n,d;
-	n=(p2.y-p1.y);
-	d=(p2.x-p1.x);
-	m=(n/d);
+	m=calc_pend(p1,p2);
 	
 	//Muestra la pendiente
-	cout<< endl<< "La pendiente de la recta es: " << m <<endl;
-	
+	cout<< endl << "La pendiente de la recta es: " << m << endl;
+
 	return 0;
 }
 
-
+float calc_pend(punto p1, punto p2)
+{
+	float n,d,m=0;
+	n=((p2.y)-(p1.y));
+	d=((p2.x)-(p1.x));
+	m=(n/d);
+	return m;
+}
